@@ -1,0 +1,57 @@
+version: "3.7"
+volumes: 
+  backend-node-modules:
+  frontend-node-modules:
+  data-node:
+
+services: 
+
+  frontend:
+    build: 
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    container_name: 
+      diary-frontend
+    environment: 
+      - COMMAND=${COMMAND:-start}
+    env_file: 
+      - .env
+    image: diary-frontend
+    ports: 
+      - 8080:3000
+    volumes: 
+      - ./app/frontend:/app
+      - frontend-node-modules:/app/node_modules
+    tty: true
+
+  db:
+    image: mongo:4.2
+    container_name: diary-mongo
+    volumes:
+        - data-node:/data/db
+    ports:
+        - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+  
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: diary-backend
+    image: diary-backend
+    environment:
+      - NODE_ENV=development
+      - COMMAND=${COMMAND:-serve}
+      - PORT=8090
+    env_file:
+      - .env.development
+    ports: 
+      - 8090:8090
+    volumes:
+      - ./app/backend:/app
+      - backend-node-modules:/app/node_modules
+    tty: true
+    depends_on:
+      - db

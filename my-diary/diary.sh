@@ -1,0 +1,6 @@
+alias diary-build="docker-compose build"
+alias diary-frontend="diary-build frontend && docker-compose up frontend"
+alias diary-backend="diary-build backend && docker-compose up backend"
+alias diary-backend-bash="docker-compose exec backend bash"
+alias diary-frontend-bash="docker-compose exec frontend bash"
+alias diary-backend-logs="docker logs -f prototype-backend --tail 100"
