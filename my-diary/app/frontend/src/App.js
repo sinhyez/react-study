@@ -1,11 +1,14 @@
-import './css/App.css';
+import Header from './components/layout/header'
+import Home from './components/layout/home'
+import './css/App.css'
 
 function App() {
   return (
-    <div className="App">
-      <span>hello world</span>
-    </div>
-  );
+    <>
+      <Header />
+      <Home />
+    </>
+  )
 }
 
-export default App;
+export default App

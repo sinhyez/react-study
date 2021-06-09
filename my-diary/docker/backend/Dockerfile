@@ -2,7 +2,7 @@ FROM node:14
 
 WORKDIR /app
 
-COPY .env.production .env.production
+COPY .env.development .env.production
 
 COPY app/backend .
 

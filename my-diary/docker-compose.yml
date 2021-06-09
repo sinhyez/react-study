@@ -14,8 +14,6 @@ services:
       diary-frontend
     environment: 
       - COMMAND=${COMMAND:-start}
-    env_file: 
-      - .env
     image: diary-frontend
     ports: 
       - 8080:3000
@@ -44,7 +42,6 @@ services:
     environment:
       - NODE_ENV=development
       - COMMAND=${COMMAND:-serve}
-      - PORT=8090
     env_file:
       - .env.development
     ports: 
