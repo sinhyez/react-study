@@ -8,15 +8,19 @@ const postSchema = new mongoose.Schema({
 
   title: {
     type: String,
-    // require: true
+    required: true
+  },
+  username: {
+    type: String,
+    required: true
   },
   message: {
     type: String,
-    // require: true
+    required: true
   }
 }, {
   timestamps: true
 })
 
-const Post = mongoose.model('post', postSchema)
+const Post = mongoose.model('Post', postSchema)
 module.exports = Post
