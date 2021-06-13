@@ -7,9 +7,12 @@ const Post = require('../models/postModel')
 // @path http://localhost:8090/
 // @desc Get All PostList
 exports.getAllPost = async (req, res, next) => {
-  
-  const posts = await Post.find({})
-  return res.send(posts)
+  try {
+    const posts = await Post.find({})
+    return res.send(posts)
+  } catch (err) {
+    next(err)
+  }
 }
 
 // @Method Get
@@ -17,12 +20,10 @@ exports.getAllPost = async (req, res, next) => {
 // @desc Get One Post
 exports.getOnePost = async (req, res, next) => {
   try {
-    const post = await Post.findOne({ _id: req.params.id })
+    const post = await Post.findOne({ _id: req.params.id }).exec()
     return res.send(post)
-  } catch(err) {
-    res.status(404).send({
-      message: 'error!!'
-    })
+  } catch (err) {
+    next(err)
     console.log(err)
   }
 }
@@ -30,7 +31,7 @@ exports.getOnePost = async (req, res, next) => {
 // @metod Post
 // @path http://localhost:8090/post
 // @desc Post Create
-exports.postCreate = async (req, res) => {
+exports.postCreate = async (req, res, next) => {
   const { title, message, username } = req.body
   
   const newPost = new Post({ title, message, username })
@@ -38,7 +39,7 @@ exports.postCreate = async (req, res) => {
     const result = await newPost.save()
     return res.send(result)
   } catch (err) {
-    res.status(400).send(err.message)
+    next(err)
     console.log(err)
   }
 }
@@ -46,15 +47,15 @@ exports.postCreate = async (req, res) => {
 // @method put
 // @path http://localhost:8090/post/edit/:id
 // @desc Update Post
-exports.postEdit =  async (req, res) => {
+exports.postEdit =  async (req, res, next) => {
   const { title, message } = req.body
   const { id: _id } = req.params
 
   try {
-    const result = await Post.findOneAndUpdate({ _id }, { title, message }, { new: true }).orFail().exec()
+    const result = await Post.findOneAndUpdate({ _id }, { title, message }, { new: true }).exec()
     return res.send(result)
   } catch (err) {
-    res.status(400).send(err.message)
+    next(err)
     console.log(err)
   }
 }
@@ -62,14 +63,13 @@ exports.postEdit =  async (req, res) => {
 // @method delete
 // @path http://localhost:8090/post/delete/:id
 // @desc Delete Post
-exports.postDelete = async(req, res) => {
+exports.postDelete = async (req, res, next) => {
   const { id: _id } = req.params
 
   try {
-    await Post.findOneAndDelete({ _id }).orFail().exec()
+    await Post.findOneAndDelete({ _id }).exec()
     return res.send({ message: 'delete success' })
   } catch (err) {
-    res.status(400).send(err.message)
-    console.log(err)
+    next(err)
   }
 }

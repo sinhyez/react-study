@@ -10,6 +10,7 @@ const postRouter = require('./router/post')
 const db = require('./db/dbMongoose')
 const passport = require('passport')
 const session = require('express-session')
+const errorHandler = require('./middlewares/error')
 
 const port = process.env.PORT
 const app = express()
@@ -36,6 +37,8 @@ passport.deserializeUser((id, done) => { // id는 req.session.passport.user에 �
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use(errorHandler.errorHandle)
 
 app.listen(port, () => {
   console.log(`listening on ${port}`)
