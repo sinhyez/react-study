@@ -11,8 +11,6 @@ const Home = () => {
     loading: state.post.loading
   }), shallowEqual)
 
-  console.log(posts)
-
   useEffect(() => {
     dispatch(fetchList())
   }, [dispatch])

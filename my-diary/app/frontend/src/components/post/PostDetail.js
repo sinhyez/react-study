@@ -13,11 +13,9 @@ const PostDetail = ({ match }) => {
     loading: state.post.loading
   }), shallowEqual)
 
-  console.log(post)
-
   useEffect(() => {
     dispatch(getPost(_id))
-  }, [dispatch])
+  }, [dispatch, _id])
   
   
   return(

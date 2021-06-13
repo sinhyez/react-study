@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 import Header from './components/layout/Header'
 import Home from './components/layout/Home'
 import PostDetail from './components/post/PostDetail'
