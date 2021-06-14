@@ -1,11 +1,16 @@
-import React from 'react'
+//-------------------------------
+// Header Component
+//-------------------------------
+
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return(
     <div className="header">
       <h1 className="app-title">
-        My Diary App
+        <Link to='/'>My Diary App</Link>
       </h1>
+      <Link to='/create'>Posting!</Link>
     </div>
   );
 }

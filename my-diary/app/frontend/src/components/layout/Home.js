@@ -1,13 +1,19 @@
+//-------------------------------
+// Home Component
+//-------------------------------
+
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { fetchList } from '../../redux/action/postAction'
+import Loading from '../common/loading'
 import PostContainer from '../post/PostContainer'
 
 const Home = () => {
 
   const dispatch = useDispatch()
+
   const { posts, loading } = useSelector(state => ({
-    posts: state.post.post[0],
+    posts: state.post.posts,
     loading: state.post.loading
   }), shallowEqual)
 
@@ -17,7 +23,7 @@ const Home = () => {
 
   return(
     <>
-    { loading ? <span>loading</span> : <PostContainer posts={ posts } /> }
+    { loading ? <Loading /> : <PostContainer posts={ posts } /> }
     </>
   )
 }

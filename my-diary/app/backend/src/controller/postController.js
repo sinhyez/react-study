@@ -24,7 +24,6 @@ exports.getOnePost = async (req, res, next) => {
     return res.send(post)
   } catch (err) {
     next(err)
-    console.log(err)
   }
 }
 
