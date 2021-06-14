@@ -1,8 +1,8 @@
 # personal blog
 
 ## Side Project: A simple personal blog app
-Purpose of this project: Implementing CRUD and user authentication web applications using the MERN stack
-Tech Stack: MongoDb, React, Express, Node.js 
+- Purpose of this project: Implementing CRUD and user authentication web applications using the MERN stack
+- Tech Stack: MongoDb, React, Express, Node.js 
 
 -------------------------------
 
