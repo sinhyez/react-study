@@ -19,7 +19,7 @@ $ backend
 -------------------------------
 
 ※Default ports
-Server : _http://localhost:5000_
-Client : _http://localhost:3001_
+- Server : _http://localhost:5000_
+- Client : _http://localhost:3001_
 
 -------------------------------
