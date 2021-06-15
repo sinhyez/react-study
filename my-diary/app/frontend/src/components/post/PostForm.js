@@ -1,12 +1,10 @@
 //-------------------------------
 // PostFrom Component
 //-------------------------------
-
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import history from '../../history'
 import { addPost } from '../../redux/action/postAction'
-import useInput from '../common/useInput'
+import useInput from '../../utils/useInput'
 
 const PostForm = () => {
 
@@ -21,7 +19,6 @@ const PostForm = () => {
     (e) => {
       e.preventDefault()
       dispatch(addPost(value))
-      history.push('/')
     },
     [dispatch, value],
   )

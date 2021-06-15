@@ -4,7 +4,7 @@ import Home from './components/layout/Home'
 import PostDetail from './components/post/PostDetail'
 import PostForm from './components/post/PostForm'
 import './css/App.css'
-import history from './history'
+import history from './utils/history'
 
 function App() {
   return (

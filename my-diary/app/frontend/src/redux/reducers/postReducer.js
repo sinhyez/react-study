@@ -1,7 +1,7 @@
 //-------------------------------
 // Redux PostReducer
 //-------------------------------
-import { ADD_POST, DELETE_POST, FETCH_DATA, GET_POST, LOADING, UPDATE_POST } from '../action/types'
+import { ADD_POST, DELETE_POST, FETCH_DATA, GET_POST, UPDATE_POST } from '../action/types'
 
 const initState = {
   posts: [],

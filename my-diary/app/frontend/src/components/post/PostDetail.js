@@ -1,11 +1,10 @@
 //-------------------------------
 // PostDetail Component
 //-------------------------------
-
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { getPost } from '../../redux/action/postAction'
-import history from '../../history'
+import history from '../../utils/history'
 import Loading from '../common/loading'
 
 const PostDetail = ({ match }) => {

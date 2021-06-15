@@ -1,16 +1,16 @@
 //-------------------------------
 // Redux PostAction
 //-------------------------------
-
 import axios from 'axios'
+import history from '../../utils/history'
 import { ADD_POST, FAILURE, FETCH_DATA, GET_POST, LOADING } from "./types"
 
 const BASE_URL = 'http://localhost:5000'
-console.log(`${BASE_URL}/`)
 
 const isLoading = () => {
   return { type: LOADING }
 }
+
 const isFailed = (err) => {
   return { type:FAILURE, payload: err.response }
 }
@@ -40,10 +40,10 @@ export const getPost = (_id) => async dispatch => {
 // @desc 게시글 포스팅
 export const addPost = (data) => async dispatch => {
   dispatch(isLoading())
-
   try {
-    const res = await axios.post(`${BASE_URL}/post`)
+    const res = await axios.post(`${BASE_URL}/post`, { ...data })
     dispatch({ type: ADD_POST, payload: res.data })
+    history.push('/')  
   } catch (err) {
     dispatch(isFailed(err))
   }

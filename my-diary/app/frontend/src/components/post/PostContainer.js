@@ -1,7 +1,6 @@
 //-------------------------------
 // PostContainer Component
 //-------------------------------
-
 import PostList from "./PostList"
 
 const PostContainer = ({ posts }) => {
