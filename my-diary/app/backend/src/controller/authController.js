@@ -12,18 +12,18 @@ exports.createUser = async (req, res, next) => {
   const { email, password, confirm, username, nickname } = req.body
 
   let user 
-  user = await User.findOne({ email: email }).exec()
-  if (user) return res.status(400).send({ message: "이미 존재하는 사용자 입니다." })
 
-  if (password !== confirm) return res.status(400).send({ message: "비밀번호가 일치하지 않습니다." })
+  user = await User.findOne({ email: email }).or({ username: username }).exec()
+  if (user) return next({ code: 400, message: "이미 존재하는 사용자 입니다." })
+  
+  if (password !== confirm) return next({ code: 400, message: "비밀번호가 일치하지 않습니다." })
   delete confirm
 
-  user = new User({ 
-    email, username, nickname, password })  
+  user = new User({ email, username, nickname, password })  
 
   try {
     const result = await user.save()
-    return res.send({result: result, message: "success!!"})
+    return res.send({ result: result, message: "success!!" })
   } catch (err) {
     console.log(err)
     return next(err)
@@ -36,6 +36,7 @@ exports.createUser = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     passport.authenticate('local', (err, user, info) => {
+      
       if(err || !user) return next(err)
 
       req.login(user, { session: true }, (err) => {
