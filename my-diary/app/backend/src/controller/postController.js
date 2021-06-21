@@ -8,7 +8,7 @@ const Post = require('../models/postModel')
 // @desc Get All PostList
 exports.getAllPost = async (req, res, next) => {
   try {
-    const posts = await Post.find({})
+    const posts = await Post.find({}).sort('_id', -1)
     return res.send(posts)
   } catch (err) {
     next(err)
